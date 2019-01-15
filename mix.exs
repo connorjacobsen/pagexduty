@@ -3,13 +3,13 @@ defmodule Pagexduty.Mixfile do
 
   def project do
     [app: :pagexduty,
-     version: "0.1.0",
-     elixir: "~> 1.0",
-     description: description,
+     version: "0.2.0",
+     elixir: "~> 1.6",
+     description: description(),
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     package: package,
-     deps: deps]
+     package: package(),
+     deps: deps()]
   end
 
   # Configuration for the OTP application
@@ -37,9 +37,9 @@ defmodule Pagexduty.Mixfile do
   end
 
   defp deps do
-    [{:httpoison, "~> 0.6"},
+    [{:httpoison, "~> 1.5"},
      {:exjsx, "~> 3.1.0", app: false},
-     {:mock, "~> 0.1.1", only: :test}]
+     {:bypass, "~> 1.0", only: :test}]
   end
 
   defp package do

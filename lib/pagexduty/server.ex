@@ -42,8 +42,16 @@ defmodule Pagexduty.Server do
   end
 
   defp create_event_url do
-    "https://events.pagerduty.com/generic/2010-04-15/create_event.json"
+    cfg = Application.get_env(:pagexduty, :url)
+    base_url = resolve_url_config(cfg)
+    "#{base_url}/generic/2010-04-15/create_event.json"
   end
+
+  defp resolve_url_config(:bypass) do
+    bypass_port = Application.get_env(:pagexduty, :bypass_port)
+    "http://localhost:#{bypass_port}"
+  end
+  defp resolve_url_config(base_url), do: base_url
 
   defp default_headers do
     %{"Content-type" => "application/json"}
